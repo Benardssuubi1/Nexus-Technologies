@@ -1,0 +1,48 @@
+:root{
+  --container-max:1100px;
+}
+
+html{font-size:clamp(14px,1.1vw,16px)}
+body{line-height:1.55}
+
+/* Make media scale responsively */
+img, svg{max-width:100%;height:auto;display:block}
+
+/* Fluid container helper */
+.container{max-width:var(--container-max);margin:0 auto;padding:0 5%}
+
+/* Avatar scales */
+.avatar{width:clamp(72px,12vw,120px);height:clamp(72px,12vw,120px);font-size:clamp(20px,32px,44px)}
+
+/* Buttons full width on small screens */
+.btn-primary, .nav-cta{white-space:nowrap}
+@media(max-width:520px){
+  .btn-primary, .nav-cta{width:100%;display:inline-flex;justify-content:center}
+}
+
+/* Make contact-grid adapt earlier */
+.contact-grid{grid-template-columns:1fr 360px}
+@media(max-width:980px){
+  .contact-grid{grid-template-columns:1fr;gap:1.25rem;padding:2.5rem 5%}
+}
+
+/* Improve nav collapse breakpoint */
+@media(max-width:900px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+}
+
+/* Ensure hero text wraps nicely */
+h1{word-break:break-word}
+
+/* Improve touch targets for small screens */
+.strip-item{font-size:0.95rem}
+
+/* Mobile menu full height and scroll */
+.mobile-menu{overflow:auto;padding-top:1.5rem}
+
+/* Ensure footer stacks cleanly */
+footer{gap:.6rem}
+
+/* Small utility to hide elements visually but keep accessible */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}

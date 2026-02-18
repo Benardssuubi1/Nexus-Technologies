@@ -118,6 +118,7 @@
       footer { flex-direction: column; text-align: center; }
     }
   </style>
+  <link rel="stylesheet" href="responsive.css">
 </head>
 <body>
 
@@ -144,7 +145,7 @@
     <li><a href="contact.html" class="active">Contact</a></li>
   </ul>
   <a href="contact.html" class="nav-cta">Get a Quote</a>
-  <button class="hamburger" id="hamburger" aria-label="Menu">
+  <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
 </nav>
@@ -253,7 +254,7 @@
   // Hamburger
   const ham = document.getElementById('hamburger');
   const mob = document.getElementById('mobileMenu');
-  ham.addEventListener('click', () => { ham.classList.toggle('open'); mob.classList.toggle('open'); });
+  ham.addEventListener('click', () => { const nowOpen = ham.classList.toggle('open'); mob.classList.toggle('open'); ham.setAttribute('aria-expanded', nowOpen); });
   mob.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { ham.classList.remove('open'); mob.classList.remove('open'); }));
 
   // Basic reveal for form and cards (lightweight)

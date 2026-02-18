@@ -397,6 +397,7 @@
       .why-grid, .svc-grid { grid-template-columns: repeat(2,1fr); }
     }
   </style>
+  <link rel="stylesheet" href="responsive.css">
 </head>
 <body>
 
@@ -423,7 +424,7 @@
     <li><a href="contact.html">Contact</a></li>
   </ul>
   <a href="contact.html" class="nav-cta">Get a Quote</a>
-  <button class="hamburger" id="hamburger" aria-label="Menu">
+  <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
 </nav>
@@ -475,8 +476,8 @@
 
 <!-- CONTACT STRIP -->
 <div class="contact-strip">
-  <div class="strip-item">📱 <strong>WhatsApp</strong>&nbsp;0758633718</div>
-  <div class="strip-item">📞 <strong>Mobile</strong>&nbsp;0704684866</div>
+  <div class="strip-item">📱 <strong>WhatsApp</strong>&nbsp;0758 633 718</div>
+  <div class="strip-item">📞 <strong>Mobile</strong>&nbsp;0758 637 118</div>
   <div class="strip-item">✉️ <strong>Email</strong>&nbsp;bensuubi614@gmail.com</div>
   <div class="strip-item">📍 <strong>Location</strong>&nbsp;Kampala, Uganda</div>
 </div>
@@ -573,7 +574,6 @@
     <a href="contact.html">Contact</a>
   </div>
 </footer>
-
 <script>
   // Nav scroll effect
   const nav = document.getElementById('navbar');
@@ -583,8 +583,9 @@
   const ham = document.getElementById('hamburger');
   const mob = document.getElementById('mobileMenu');
   ham.addEventListener('click', () => {
-    ham.classList.toggle('open');
+    const nowOpen = ham.classList.toggle('open');
     mob.classList.toggle('open');
+    ham.setAttribute('aria-expanded', nowOpen);
   });
   mob.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
     ham.classList.remove('open'); mob.classList.remove('open');
