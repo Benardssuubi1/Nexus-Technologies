@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Services — Nexus Technologies</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;900&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #f0f4f8;
+      --bg2:        #e6edf5;
+      --white:      #ffffff;
+      --cyan:       #00b5a8;
+      --cyan-dark:  #008f85;
+      --cyan-soft:  rgba(0,181,168,.10);
+      --ink:        #0d1f2d;
+      --ink2:       #2d4a5a;
+      --muted:      #6b8fa3;
+      --border:     rgba(0,181,168,.18);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 400;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV (same as index) ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 5%;
+      background: rgba(240,244,248,.88);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+      transition: padding .3s, box-shadow .3s;
+    }
+    nav.scrolled { padding: .75rem 5%; box-shadow: 0 4px 30px rgba(0,0,0,.07); }
+    .nav-brand { display: flex; align-items: center; gap: .75rem; text-decoration: none; }
+    .brand-logo { width: 38px; height: 38px; }
+    .brand-text { display: flex; flex-direction: column; line-height: 1.1; }
+    .brand-name { font-family: 'Orbitron',sans-serif; font-size: .82rem; font-weight: 700; letter-spacing: .1em; color: var(--cyan); }
+    .brand-sub { font-size: .6rem; color: var(--muted); letter-spacing: .15em; text-transform: uppercase; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: var(--ink2); text-decoration: none; font-size: .88rem; font-weight: 500;
+      transition: color .2s; position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -3px; left: 0; right: 100%;
+      height: 1.5px; background: var(--cyan); transition: right .25s;
+    }
+    .nav-links a:hover { color: var(--cyan); }
+    .nav-links a:hover::after, .nav-links a.active::after { right: 0; }
+    .nav-links a.active { color: var(--cyan); }
+    .nav-cta {
+      background: var(--cyan); color: #fff;
+      padding: .55rem 1.5rem; border-radius: 100px;
+      font-size: .83rem; font-weight: 600; text-decoration: none;
+      transition: all .25s; box-shadow: 0 4px 16px rgba(0,181,168,.25);
+    }
+    .nav-cta:hover { background: var(--cyan-dark); transform: translateY(-1px); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .hamburger span { width: 22px; height: 2px; background: var(--ink); display: block; transition: all .3s; border-radius: 2px; }
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+    .mobile-menu {
+      display: none; position: fixed; inset: 0; top: 62px;
+      background: rgba(240,244,248,.97); backdrop-filter: blur(20px);
+      z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-family: 'Orbitron',sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--ink); text-decoration: none; }
+    .mobile-menu a:hover { color: var(--cyan); }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      padding: 9rem 5% 5rem;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: relative; overflow: hidden;
+      text-align: center;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(0,181,168,.14) 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none;
+    }
+    .page-hero::after {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 80% at 50% 60%, rgba(240,244,248,.6) 0%, transparent 70%);
+    }
+    .hero-inner { position: relative; z-index: 1; }
+    .page-tag {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-size: .72rem; font-weight: 600; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--cyan);
+      background: var(--cyan-soft); border: 1px solid var(--border);
+      padding: .35rem 1rem; border-radius: 100px;
+      margin-bottom: 1.5rem;
+    }
+    .page-tag::before { content: ''; width: 6px; height: 6px; background: var(--cyan); border-radius: 50%; }
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      font-weight: 900; color: var(--ink);
+      letter-spacing: -.01em; line-height: 1.1;
+      margin-bottom: 1.2rem;
+      animation: fadeUp .7s ease both;
+    }
+    h1 em { font-style: normal; color: var(--cyan); }
+    .page-sub {
+      font-size: 1rem; color: var(--muted); max-width: 500px;
+      margin: 0 auto; line-height: 1.75;
+      animation: fadeUp .7s .1s ease both;
+    }
+
+    /* ── SERVICE ENTRIES ── */
+    .service-entry {
+      padding: 6rem 5%;
+      position: relative;
+    }
+    .service-entry:nth-child(even) { background: var(--white); }
+
+    .entry-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center; max-width: 1100px; margin: 0 auto;
+    }
+    .entry-inner.flip { }
+    .entry-inner.flip .entry-text { order: 2; }
+    .entry-inner.flip .entry-visual { order: 1; }
+
+    /* text side */
+    .entry-num {
+      font-family: 'Orbitron', sans-serif;
+      font-size: .65rem; font-weight: 700;
+      letter-spacing: .25em; text-transform: uppercase;
+      color: var(--cyan); margin-bottom: .6rem;
+      display: flex; align-items: center; gap: .6rem;
+    }
+    .entry-num::before { content: ''; width: 20px; height: 1.5px; background: var(--cyan); }
+
+    h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+      font-weight: 700; color: var(--ink);
+      letter-spacing: .01em; line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    h2 em { font-style: normal; color: var(--cyan); }
+
+    .entry-desc {
+      font-size: .95rem; color: var(--muted);
+      line-height: 1.8; margin-bottom: 1.8rem;
+    }
+
+    .feat-list { list-style: none; margin-bottom: 2rem; display: flex; flex-direction: column; gap: .65rem; }
+    .feat-list li {
+      display: flex; align-items: flex-start; gap: .75rem;
+      font-size: .9rem; color: var(--ink2); line-height: 1.55;
+    }
+    .feat-list li::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--cyan); border-radius: 50%;
+      flex-shrink: 0; margin-top: .5rem;
+    }
+
+    .entry-cta {
+      display: inline-flex; align-items: center; gap: .6rem;
+      background: var(--cyan); color: #fff;
+      padding: .8rem 2rem; border-radius: 100px;
+      font-size: .88rem; font-weight: 600;
+      text-decoration: none; transition: all .25s;
+      box-shadow: 0 6px 20px rgba(0,181,168,.25);
+    }
+    .entry-cta:hover { background: var(--cyan-dark); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,181,168,.35); }
+
+    /* visual side */
+    .entry-visual {
+      border-radius: 20px; overflow: hidden;
+      background: var(--bg2);
+      border: 1.5px solid var(--border);
+      min-height: 340px;
+      display: flex; align-items: center; justify-content: center;
+      padding: 2.5rem;
+      position: relative;
+    }
+    .entry-visual::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(0,181,168,.05) 0%, transparent 70%);
+    }
+
+    /* Browser mockup */
+    .browser {
+      width: 100%; background: var(--white);
+      border-radius: 10px; overflow: hidden;
+      box-shadow: 0 12px 40px rgba(0,0,0,.1);
+      position: relative; z-index: 1;
+    }
+    .browser-bar {
+      background: var(--bg2); padding: .65rem 1rem;
+      display: flex; align-items: center; gap: .5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .bdot { width: 9px; height: 9px; border-radius: 50%; }
+    .burl {
+      flex: 1; background: var(--white);
+      border: 1px solid var(--border); border-radius: 6px;
+      padding: .2rem .8rem; font-size: .62rem;
+      color: var(--muted); font-family: 'Orbitron', sans-serif;
+      letter-spacing: .04em;
+    }
+    .browser-body { padding: 1.2rem; }
+    .b-nav { display: flex; gap: .5rem; margin-bottom: 1rem; }
+    .b-nav-item { height: 8px; border-radius: 4px; background: var(--bg2); }
+    .b-hero-img { height: 80px; background: linear-gradient(135deg, rgba(0,181,168,.15), rgba(0,181,168,.05)); border-radius: 6px; margin-bottom: .8rem; display:flex; align-items:center; justify-content:center; }
+    .b-lines { display: flex; flex-direction: column; gap: .4rem; }
+    .b-line { height: 7px; background: var(--bg2); border-radius: 4px; }
+    .b-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: .5rem; margin-top: .8rem; }
+    .b-card { height: 40px; background: var(--bg2); border-radius: 6px; border: 1px solid var(--border); }
+
+    /* Code mockup */
+    .code-box {
+      width: 100%; background: #0d1f2d;
+      border-radius: 10px; padding: 1.4rem 1.6rem;
+      font-family: 'Courier New', monospace;
+      font-size: .78rem; line-height: 1.7;
+      box-shadow: 0 12px 40px rgba(0,0,0,.15);
+      position: relative; z-index: 1;
+    }
+    .code-hdr { display: flex; gap: 6px; margin-bottom: 1rem; align-items: center; }
+    .code-hdr span { font-size: .62rem; color: rgba(255,255,255,.3); margin-left: .5rem; font-family: 'Outfit', sans-serif; }
+    .cl { margin-bottom: 0; }
+    .kw { color: #00e5d4; } .fn { color: #7dd3fc; } .str { color: #86efac; }
+    .cm { color: #3d5a6a; } .num { color: #fbbf24; } .var { color: #e2e8f0; }
+    .indent { padding-left: 1.4rem; }
+    .indent2 { padding-left: 2.8rem; }
+    .cursor-blink { display: inline-block; width: 7px; height: 13px; background: #00e5d4; vertical-align: middle; animation: blink 1s infinite; }
+    @keyframes blink { 0%,50%{opacity:1;} 51%,100%{opacity:0;} }
+
+    /* Software grid mockup */
+    .soft-mock {
+      width: 100%; position: relative; z-index: 1;
+    }
+    .soft-screen {
+      background: var(--white);
+      border-radius: 10px; overflow: hidden;
+      box-shadow: 0 12px 40px rgba(0,0,0,.1);
+    }
+    .soft-topbar {
+      background: var(--ink); padding: .6rem 1rem;
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .soft-topbar span { font-size: .65rem; color: rgba(255,255,255,.5); font-family: 'Orbitron',sans-serif; letter-spacing: .06em; }
+    .soft-body { padding: 1.2rem; display: grid; grid-template-columns: repeat(4,1fr); gap: .7rem; }
+    .app-tile {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px; padding: .8rem .4rem;
+      text-align: center; transition: all .3s;
+    }
+    .app-tile:hover { border-color: var(--cyan); transform: scale(1.05); background: var(--white); }
+    .app-ico { font-size: 1.5rem; margin-bottom: .3rem; }
+    .app-lbl { font-size: .55rem; color: var(--muted); font-family: 'Orbitron',sans-serif; letter-spacing: .04em; }
+    .install-bar {
+      margin: .8rem 1.2rem 1.2rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px; padding: .7rem 1rem;
+      display: flex; align-items: center; gap: .8rem;
+    }
+    .progress-track { flex: 1; height: 6px; background: var(--bg2); border-radius: 3px; overflow: hidden; }
+    .progress-fill {
+      height: 100%; background: var(--cyan);
+      border-radius: 3px; width: 72%;
+      animation: progress 3s ease-in-out infinite alternate;
+    }
+    @keyframes progress { from { width: 30%; } to { width: 95%; } }
+    .progress-label { font-size: .65rem; color: var(--cyan); font-family: 'Orbitron',sans-serif; font-weight: 700; white-space: nowrap; }
+
+    /* ── GET IN TOUCH STRIP ── */
+    .touch-strip {
+      background: var(--ink);
+      padding: 5rem 5%;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .touch-strip::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 70% at 50% 50%, rgba(0,181,168,.12) 0%, transparent 70%);
+    }
+    .touch-strip h2 { color: #fff; margin-bottom: .8rem; position: relative; z-index: 1; }
+    .touch-strip h2 em { font-style: normal; color: var(--cyan); }
+    .touch-strip p { color: rgba(255,255,255,.5); max-width: 420px; margin: 0 auto 2rem; line-height: 1.75; position: relative; z-index: 1; }
+    .touch-cards {
+      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+      position: relative; z-index: 1;
+    }
+    .touch-card {
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 14px; padding: 1.2rem 1.8rem;
+      text-decoration: none; color: #fff;
+      font-size: .88rem; font-weight: 500;
+      transition: all .25s;
+      display: flex; align-items: center; gap: .7rem;
+    }
+    .touch-card:hover { background: var(--cyan); border-color: var(--cyan); transform: translateY(-3px); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-brand { display: flex; align-items: center; gap: .7rem; text-decoration: none; }
+    .footer-copy { font-size: .78rem; color: var(--muted); }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a { font-size: .78rem; color: var(--muted); text-decoration: none; transition: color .2s; }
+    .footer-links a:hover { color: var(--cyan); }
+
+    /* ── SCROLL ANCHOR OFFSET ── */
+    .anchor-offset { scroll-margin-top: 80px; }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(16px);} to{opacity:1;transform:translateY(0);} }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:900px){
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .entry-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .entry-inner.flip .entry-text,
+      .entry-inner.flip .entry-visual { order: unset; }
+      .service-entry { padding: 4rem 5%; }
+      footer { flex-direction: column; text-align: center; }
+      .footer-links { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="nav-brand">
+    <svg class="brand-logo" viewBox="0 0 38 38" fill="none">
+      <rect x="1" y="1" width="36" height="36" rx="6" stroke="#00b5a8" stroke-width="1.5" fill="rgba(0,181,168,.06)"/>
+      <path d="M9 29 L9 9 L29 29 L29 9" stroke="#00b5a8" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="9" cy="9" r="2.5" fill="#00b5a8"/><circle cx="9" cy="29" r="2.5" fill="#00b5a8"/>
+      <circle cx="29" cy="9" r="2.5" fill="#00b5a8"/><circle cx="29" cy="29" r="2.5" fill="#00b5a8"/>
+      <circle cx="19" cy="19" r="1.8" fill="#00b5a8" opacity=".5"/>
+    </svg>
+    <div class="brand-text">
+      <span class="brand-name">NEXUS</span>
+      <span class="brand-sub">Technologies</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html" class="active">Services</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Get a Quote</a>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-inner">
+    <div class="page-tag">What We Offer</div>
+    <h1>Our <em>Services</em></h1>
+    <p class="page-sub">Three focused services built for students, individuals, and businesses. Real solutions, honestly delivered.</p>
+  </div>
+</div>
+
+<!-- SERVICE QUICK JUMP -->
+<div style="background:var(--white); border-bottom:1px solid var(--border); padding:1rem 5%; display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; position:sticky; top:62px; z-index:50;">
+  <a href="#webdesign" style="font-size:.82rem; font-weight:600; color:var(--muted); text-decoration:none; padding:.4rem .9rem; border-radius:100px; border:1px solid var(--border); transition:all .2s;" onmouseover="this.style.color='#00b5a8';this.style.borderColor='#00b5a8'" onmouseout="this.style.color='';this.style.borderColor=''">🌐 Web Design</a>
+  <a href="#coursework" style="font-size:.82rem; font-weight:600; color:var(--muted); text-decoration:none; padding:.4rem .9rem; border-radius:100px; border:1px solid var(--border); transition:all .2s;" onmouseover="this.style.color='#00b5a8';this.style.borderColor='#00b5a8'" onmouseout="this.style.color='';this.style.borderColor=''">📚 Coursework</a>
+  <a href="#software" style="font-size:.82rem; font-weight:600; color:var(--muted); text-decoration:none; padding:.4rem .9rem; border-radius:100px; border:1px solid var(--border); transition:all .2s;" onmouseover="this.style.color='#00b5a8';this.style.borderColor='#00b5a8'" onmouseout="this.style.color='';this.style.borderColor=''">💿 Software Install</a>
+</div>
+
+<!-- ──────────── SERVICE 1: WEB DESIGN ──────────── -->
+<section class="service-entry anchor-offset" id="webdesign">
+  <div class="entry-inner reveal">
+    <div class="entry-text">
+      <div class="entry-num">Service 01</div>
+      <h2>Web <em>Design</em></h2>
+      <p class="entry-desc">
+        We build modern, fully responsive websites that look great on every device — from phones to desktops. Whether it's a personal portfolio, a business landing page, or a multi-page company website, we design and develop it from scratch to match your vision.
+      </p>
+      <ul class="feat-list">
+        <li>Custom designed, mobile-first responsive layouts</li>
+        <li>Portfolio websites for students and professionals</li>
+        <li>Business landing pages and company websites</li>
+        <li>Contact forms, social links, and Google Maps integration</li>
+        <li>Clean, readable code — you own it fully</li>
+        <li>Basic on-page SEO and fast loading speeds</li>
+        <li>Delivered with clear instructions to update it yourself</li>
+      </ul>
+      <a href="contact.html" class="entry-cta">Request Web Design →</a>
+    </div>
+    <div class="entry-visual">
+      <div class="browser">
+        <div class="browser-bar">
+          <div class="bdot" style="background:#ff5f57"></div>
+          <div class="bdot" style="background:#febc2e"></div>
+          <div class="bdot" style="background:#28c840"></div>
+          <div class="burl">yourclient.ug</div>
+        </div>
+        <div class="browser-body">
+          <!-- fake nav -->
+          <div class="b-nav">
+            <div class="b-nav-item" style="width:60px;background:rgba(0,181,168,.2)"></div>
+            <div style="flex:1"></div>
+            <div class="b-nav-item" style="width:30px"></div>
+            <div class="b-nav-item" style="width:30px"></div>
+            <div class="b-nav-item" style="width:30px"></div>
+            <div class="b-nav-item" style="width:55px;background:rgba(0,181,168,.3)"></div>
+          </div>
+          <!-- hero area -->
+          <div class="b-hero-img">
+            <svg width="48" height="48" viewBox="0 0 38 38" fill="none" opacity=".3">
+              <rect x="1" y="1" width="36" height="36" rx="6" stroke="#00b5a8" stroke-width="1.5"/>
+              <path d="M9 29 L9 9 L29 29 L29 9" stroke="#00b5a8" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <!-- text lines -->
+          <div class="b-lines">
+            <div class="b-line" style="width:55%;background:rgba(0,181,168,.2)"></div>
+            <div class="b-line" style="width:80%"></div>
+            <div class="b-line" style="width:65%"></div>
+          </div>
+          <!-- cards row -->
+          <div class="b-cards">
+            <div class="b-card"></div>
+            <div class="b-card"></div>
+            <div class="b-card"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────── SERVICE 2: COURSEWORK ──────────── -->
+<section class="service-entry anchor-offset" id="coursework">
+  <div class="entry-inner flip reveal">
+    <div class="entry-text">
+      <div class="entry-num">Service 02</div>
+      <h2>Coursework <em>Handling</em></h2>
+      <p class="entry-desc">
+        Stuck on a programming assignment or tech project? We provide professional academic assistance, delivering quality, original work before your deadline. Every solution comes with clear comments so you can understand and learn from it.
+      </p>
+      <ul class="feat-list">
+        <li>Programming assignments — Python, Java, C++, JavaScript, PHP, and more</li>
+        <li>Database design and SQL coursework</li>
+        <li>Web development projects (HTML, CSS, JavaScript, React)</li>
+        <li>Data structures, algorithms, and logic problems</li>
+        <li>IT and computer science research papers and reports</li>
+        <li>100% original — no copy-paste, no plagiarism</li>
+        <li>Code fully commented and explained on request</li>
+      </ul>
+      <a href="contact.html" class="entry-cta">Request Coursework Help →</a>
+    </div>
+    <div class="entry-visual">
+      <div class="code-box">
+        <div class="code-hdr">
+          <div style="width:10px;height:10px;border-radius:50%;background:#ff5f57"></div>
+          <div style="width:10px;height:10px;border-radius:50%;background:#febc2e"></div>
+          <div style="width:10px;height:10px;border-radius:50%;background:#28c840"></div>
+          <span>assignment.py — Nexus Technologies</span>
+        </div>
+        <div class="cl"><span class="cm"># Solution — clean & commented ✓</span></div>
+        <div class="cl"><span class="kw">def </span><span class="fn">sort_students</span>(<span class="var">students</span>):</div>
+        <div class="cl indent"><span class="cm"># Sort by grade, descending</span></div>
+        <div class="cl indent"><span class="kw">return </span><span class="fn">sorted</span>(</div>
+        <div class="cl indent2"><span class="var">students</span>,</div>
+        <div class="cl indent2"><span class="var">key</span>=<span class="kw">lambda </span><span class="var">s</span>: <span class="var">s</span>[<span class="str">'grade'</span>],</div>
+        <div class="cl indent2"><span class="var">reverse</span>=<span class="kw">True</span></div>
+        <div class="cl indent">)</div>
+        <div class="cl" style="margin-top:.5rem"><span class="cm"># Test it</span></div>
+        <div class="cl"><span class="var">result</span> = <span class="fn">sort_students</span>(<span class="var">data</span>)</div>
+        <div class="cl"><span class="fn">print</span>(<span class="str">"Done! Grade: A ✓"</span>)</div>
+        <div class="cl" style="margin-top:.3rem"><span class="cursor-blink"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────── SERVICE 3: SOFTWARE INSTALL ──────────── -->
+<section class="service-entry anchor-offset" id="software">
+  <div class="entry-inner reveal">
+    <div class="entry-text">
+      <div class="entry-num">Service 03</div>
+      <h2>Software <em>Installation</em></h2>
+      <p class="entry-desc">
+        Getting software set up properly shouldn't be a headache. We handle everything — from full operating system installs to configuring your favourite apps. We come to you in Kampala or guide you step by step over a remote session.
+      </p>
+      <ul class="feat-list">
+        <li>Windows and Linux OS installation and setup</li>
+        <li>Microsoft Office and productivity suite installation</li>
+        <li>Antivirus, firewall, and security software setup</li>
+        <li>Developer tools — VS Code, Git, Node.js, Python, XAMPP, and more</li>
+        <li>Adobe Creative Suite installation and configuration</li>
+        <li>Printer, scanner, and peripheral driver installation</li>
+        <li>System cleanup, optimization, and speed improvements</li>
+        <li>On-site visits in Kampala or remote support via AnyDesk</li>
+      </ul>
+      <a href="contact.html" class="entry-cta">Book an Installation →</a>
+    </div>
+    <div class="entry-visual">
+      <div class="soft-mock">
+        <div class="soft-screen">
+          <div class="soft-topbar">
+            <div class="bdot" style="background:#ff5f57"></div>
+            <div class="bdot" style="background:#febc2e"></div>
+            <div class="bdot" style="background:#28c840"></div>
+            <span style="margin-left:.5rem">Software Setup — Nexus Tech</span>
+          </div>
+          <div class="soft-body">
+            <div class="app-tile"><div class="app-ico">🪟</div><div class="app-lbl">Windows</div></div>
+            <div class="app-tile"><div class="app-ico">📄</div><div class="app-lbl">MS Office</div></div>
+            <div class="app-tile"><div class="app-ico">🛡️</div><div class="app-lbl">Antivirus</div></div>
+            <div class="app-tile"><div class="app-ico">💻</div><div class="app-lbl">VS Code</div></div>
+            <div class="app-tile"><div class="app-ico">🐍</div><div class="app-lbl">Python</div></div>
+            <div class="app-tile"><div class="app-ico">🎨</div><div class="app-lbl">Adobe</div></div>
+            <div class="app-tile"><div class="app-ico">🖨️</div><div class="app-lbl">Drivers</div></div>
+            <div class="app-tile"><div class="app-ico">🐧</div><div class="app-lbl">Linux</div></div>
+          </div>
+          <div class="install-bar">
+            <div class="progress-track"><div class="progress-fill"></div></div>
+            <div class="progress-label">Installing...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GET IN TOUCH -->
+<div class="touch-strip reveal">
+  <h2>Need Any of <em>These?</em></h2>
+  <p>Reach out and tell us what you need — we'll get back to you fast and sort out the details together.</p>
+  <div class="touch-cards">
+    <a href="https://wa.me/256704684866" class="touch-card">💬 WhatsApp — 0704 684 866</a>
+    <a href="tel:0758637118" class="touch-card">📞 Call — 0758 637 118</a>
+    <a href="mailto:bensuubi614@gmail.com" class="touch-card">✉️ bensuubi614@gmail.com</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a href="index.html" class="footer-brand">
+    <svg width="30" height="30" viewBox="0 0 38 38" fill="none">
+      <rect x="1" y="1" width="36" height="36" rx="6" stroke="#00b5a8" stroke-width="1.5" fill="rgba(0,181,168,.06)"/>
+      <path d="M9 29 L9 9 L29 29 L29 9" stroke="#00b5a8" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="9" cy="9" r="2.5" fill="#00b5a8"/><circle cx="29" cy="9" r="2.5" fill="#00b5a8"/>
+      <circle cx="9" cy="29" r="2.5" fill="#00b5a8"/><circle cx="29" cy="29" r="2.5" fill="#00b5a8"/>
+    </svg>
+    <div class="brand-text">
+      <span class="brand-name" style="font-size:.76rem">NEXUS</span>
+      <span class="brand-sub">Technologies</span>
+    </div>
+  </a>
+  <p class="footer-copy">© 2025 Nexus Technologies · Kampala, Uganda</p>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+
+  // Hamburger
+  const ham = document.getElementById('hamburger');
+  const mob = document.getElementById('mobileMenu');
+  ham.addEventListener('click', () => { ham.classList.toggle('open'); mob.classList.toggle('open'); });
+  mob.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { ham.classList.remove('open'); mob.classList.remove('open'); }));
+
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Highlight active jump link on scroll
+  const sections = ['webdesign','coursework','software'];
+  const jumpLinks = document.querySelectorAll('[href^="#"]');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && window.scrollY >= el.offsetTop - 120) current = id;
+    });
+    jumpLinks.forEach(a => {
+      const isActive = a.getAttribute('href') === '#' + current;
+      a.style.color = isActive ? '#00b5a8' : '';
+      a.style.borderColor = isActive ? '#00b5a8' : '';
+      a.style.background = isActive ? 'rgba(0,181,168,.08)' : '';
+    });
+  });
+</script>
+</body>
+</html>
