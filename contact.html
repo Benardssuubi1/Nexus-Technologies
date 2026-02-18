@@ -186,16 +186,17 @@
         <a href="mailto:bensuubi614@gmail.com" class="btn-primary" style="background:var(--white);color:var(--ink);box-shadow:none;border:1px solid var(--border);">✉️ Email</a>
       </div>
 
-      <form class="contact-form" action="mailto:bensuubi614@gmail.com" method="post" enctype="text/plain">
+      <form id="contactForm" class="contact-form" action="https://formspree.io/f/xwvnqvqp" method="POST">
         <input class="input" type="text" name="Name" placeholder="Your name" required />
         <div class="form-row">
           <input class="input" type="email" name="Email" placeholder="Your email" required />
           <input class="input" type="tel" name="Phone" placeholder="Phone (optional)" />
         </div>
         <textarea name="Message" placeholder="How can we help?" required></textarea>
-        <div style="display:flex;gap:.6rem">
-          <button type="submit" class="btn-primary">Send Message</button>
+        <div style="display:flex;gap:.6rem;align-items:center">
+          <button id="submitBtn" type="submit" class="btn-primary">Send Message</button>
           <a href="tel:0758637118" class="btn-primary" style="background:transparent;color:var(--cyan);border:1px solid var(--cyan);box-shadow:none">Call</a>
+          <div id="formStatus" style="margin-left:8px;font-size:.92rem;color:var(--muted);display:none"></div>
         </div>
       </form>
     </div>
@@ -260,7 +261,50 @@
   // Basic reveal for form and cards (lightweight)
   const observer = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  //-----formspree submission-------
+   (function(){
+    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xwvnqvqp'; // <-- replace with your Formspree form ID
+    const form = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const statusDiv = document.getElementById('formStatus');
+    if (!form) return;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      statusDiv.style.display = 'inline-block';
+      statusDiv.style.color = 'var(--muted)';
+      statusDiv.textContent = 'Sending…';
+      submitBtn.disabled = true;
+
+      try {
+        const data = new FormData(form);
+        const res = await fetch(FORMSPREE_ENDPOINT, {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (res.ok) {
+          statusDiv.style.color = 'green';
+          statusDiv.textContent = 'Message sent — thank you!';
+          form.reset();
+        } else {
+          const json = await res.json().catch(() => ({}));
+          statusDiv.style.color = 'crimson';
+          statusDiv.textContent = (json && json.error) ? json.error : 'Submission failed. Try again later.';
+        }
+      } catch (err) {
+        statusDiv.style.color = 'crimson';
+        statusDiv.textContent = 'Network error. Please try again.';
+      } finally {
+        submitBtn.disabled = false;
+        setTimeout(() => { statusDiv.style.display = 'none'; }, 6000);
+      }
+    });
+  })();
+</script>
 </script>
 </body>
 </html>
+
 
