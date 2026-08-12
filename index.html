@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Nexus Technologies Uganda — enterprise digital solutions, custom software engineering, cyber security auditing, and network infrastructure, based in Kampala." />
+  <meta property="og:title" content="Nexus Technologies Uganda — Enterprise Digital Solutions" />
+  <meta property="og:description" content="Scaling enterprise digital architecture and automated B2B solutions across Uganda." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <title>Nexus Technologies Uganda — Enterprise Digital Solutions</title>
+  <style>
+    /* ═════════════════════════════════════════════════════════════════════════
+       GLOBAL STYLES & VARIABLES
+       ═════════════════════════════════════════════════════════════════════════ */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      /* Colors */
+      --navy: #1a365d;
+      --navy-dark: #112233;
+      --tech-blue: #2b6cb0;
+      --teal: #00b4d8;
+
+      /* Slate Palette */
+      --slate-50: #f9fafb;
+      --slate-100: #f3f4f6;
+      --slate-200: #e5e7eb;
+      --slate-600: #4b5563;
+      --slate-700: #374151;
+
+      /* Text Colors */
+      --text: #111827;
+      --text-muted: #6b7280;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: white;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { text-decoration: none; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ═════════════════════════════════════════════════════════════════════════
+       NAVIGATION
+       ═════════════════════════════════════════════════════════════════════════ */
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--slate-200);
+      height: 70px;
+    }
+
+    .nav-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      color: var(--navy);
+      font-size: 18px;
+    }
+
+    .nav-logo-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--navy-dark);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--teal);
+      font-weight: 800;
+      font-size: 15px;
+      letter-spacing: -0.5px;
+      flex-shrink: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text);
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--teal);
+    }
+
+    .nav-cta {
+      background: var(--teal);
+      color: white;
+      padding: 10px 24px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+
+    .nav-cta:hover {
+      background: #0099b3;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0, 180, 216, 0.2);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 5px;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 70px; left: 0; right: 0;
+      z-index: 99;
+      background: white;
+      border-bottom: 1px solid var(--slate-200);
+      padding: 24px 20px;
+      flex-direction: column;
+      gap: 18px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      font-size: 16px;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .mobile-menu a:hover { color: var(--teal); }
+
+    /* ═════════════════════════════════════════════════════════════════════════
+       SECTIONS & TYPOGRAPHY
+       ═════════════════════════════════════════════════════════════════════════ */
+
+    section { padding: 80px 0; }
+
+    .section-label {
+      font-size: 12px;
+      color: var(--teal);
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+      display: inline-block;
+    }
+
+    h2 {
+      font-size: clamp(28px, 4vw, 48px);
+      margin-bottom: 15px;
+      color: var(--navy);
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .section-desc {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin-bottom: 50px;
+      line-height: 1.8;
+    }
+
+    /* ═════════════════════════════════════════════════════════════════════════
+       HERO SECTION
+       ═════════════════════════════════════════════════════════════════════════ */
+
+    .hero {
+      margin-top: 70px;
+      background: linear-gradient(135deg, var(--slate-50) 0%, white 100%);
+      padding: 100px 0;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--teal);
+      border: 1px solid rgba(0,180,216,0.3);
+      background: rgba(0,180,216,0.06);
+      border-radius: 100px;
+      padding: 7px 16px;
+      margin-bottom: 24px;
+    }
+
+    .hero-badge-dot {
+      width: 7px; height: 7px;
+      background: var(--teal);
+      border-radius: 50%;
+      animation: blink 2s infinite;
+    }
+
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.25} }
+
+    .hero h1 {
+      font-size: clamp(36px, 5vw, 56px);
+      line-height: 1.2;
+      margin-bottom: 20px;
+      color: var(--navy);
+      font-weight: 800;
+    }
+
+    .hero .gradient-text {
+      background: linear-gradient(135deg, var(--teal), var(--tech-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin-bottom: 30px;
+      line-height: 1.8;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .hero-contact-strip {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      border-top: 1px solid var(--slate-200);
+      padding-top: 24px;
+    }
+
+    .hero-contact-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13.5px;
+      color: var(--text-muted);
+    }
+
+    .hero-contact-item a { color: var(--text-muted); transition: color 0.2s; }
+    .hero-contact-item a:hover { color: var(--teal); }
+
+    /* ═════════════════════════════════════════════════════════════════════════
+       BUTTONS
+       ═════════════════════════════════════════════════════════════════════════ */
+
+    .btn {
+      padding: 14px 32px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+
+    .btn-primary { background: var(--teal); color: white; }
+
+    .btn-primary:hover {
+      background: #0099b3;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0, 180, 216, 0.2);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--navy);
+      border: 2px solid var(--navy);
+    }
+
+    .btn-secondary:hover {
+      background: var(--navy);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* ═════════════════════════════════════════════════════════════════════════
+       PRODUCTS SECTION
+       ═════════════════════════════════════════════════════════════════════════ */
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+
+    .product-card {
+      background: white;
+      border: 2px solid var(--slate-200);
+      border-radius: 12px;
+      padding: 40px;
+      transition: all 0.3s ease;
+    }
+
+    .product-card:hover {
+      border-color: var(--teal);
+      box-shadow: 0 10px 30px rgba(0, 180, 216, 0.1);
+      transform: translateY(-5px);
+    }
+
+    .product-icon { font-size: 40px; margin-bottom: 20px; }
+
+    .product-card h3 {
+      font-size: 22px;
+      margin-bottom: 15px;
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    .product-card p {
+      color: var(--text-muted);
+      margin-bottom: 25px;
+      line-height: 1.8;
+    }
+
+    .feature-list { list-style: none; margin-bottom: 25px; }
+
+    .feature-list li {
+      padding: 10px 0 10px 25px;
+      color: var(--text-muted);
+      position: relative;
+      line-height: 1.6;
+    }
+
+    .feature-list li:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--teal);
+      font-weight: bold;
+    }
+
+    /* ═════════════════════════════════════════════════════════════════════════
+       SERVICES SECTION (teaser)
+       ═════════════════════════════════════════════════════════════════════════ */
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+    }
+
+    .service-card {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: 12px;
+      padding: 30px;
+      transition: all 0.3s ease;
+      display: block;
+      color: var(--text);
+    }
+
+    .service-card:hover {
+      background: white;
+      border-color: var(--teal);
+      box-shadow: 0 10px 25px rgba(0, 180, 216, 0.1);
+      transform: translateY(-3px);
+    }
+
+    .service-card h3 {
+      font-size: 18px;
+      margin-bottom: 15px;
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    .service-card p {
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .service-card .service-link {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--teal);
+      letter-spacing: 0.3px;
+    }
+
+    /* ═════════════════════════════════════════════════════════════════════════
+       ARCHITECTURE SECTION
+       ═════════════════════════════════════════════════════════════════════════ */
+
+    .architecture-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      margin-bottom: 20px;
+    }
+
+    .arch-card {
+      background: white;
+      border: 1px solid var(--slate-200);
+      border-radius: 12px;
+      padding: 30px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .arch-card:hover {
+      border-color: var(--teal);
+      box-shadow: 0 10px 25px rgba(0, 180, 216, 0.1);
+      transform: translateY(-3px);
+    }
+
+    .arch-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 20px;
+      background: var(--teal);
+      color: white;
+      letter-spacing: 0.5px;
+    }
+
+    .arch-badge.coming { background: var(--slate-200); color: var(--slate-700); }
+
+    .arch-card h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      margin-top: 0;
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    .arch-domain {
+      display: inline-block;
+      font-size: 12px;
+      color: var(--teal);
+      font-family: 'Courier New', monospace;
+      margin-bottom: 15px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    span.arch-domain { color: var(--text-muted); }
+
+    .arch-card p {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .arch-note {
+      font-size: 13px;
+      color: var(--text-muted);
+      max-width: 640px;
+    }
+
+    /* ═════════════════════════════════════════════════════════════════════════
+       TEAM SECTION
+       ═════════════════════════════════════════════════════════════════════════ */
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .team-card {
+      background: white;
+      border: 1px solid var(--slate-200);
+      border-radius: 12px;
+      padding: 36px 28px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .team-card:hover {
+      border-color: var(--teal);
+      box-shadow: 0 10px 25px rgba(0, 180, 216, 0.1);
+      transform: translateY(-4px);
+    }
+
+    .team-avatar {
+      width: 68px; height: 68px;
+      background: var(--navy-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--teal);
+      margin: 0 auto 18px;
+    }
+
+    .team-name { font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+    .team-role { font-size: 12px; color: var(--teal); font-weight: 700; letter-spacing: 0.5px; margin-bottom: 14px; }
+    .team-school {
+      display: inline-block;
+      font-size: 11.5px;
+      color: var(--text-muted);
+      padding: 4px 12px;
+      border: 1px solid var(--slate-200);
+      border-radius: 100px;
+    }
+
+    /* ═════════════════════════════════════════════════════════════════════════
+       CONTACT CTA
+       ═════════════════════════════════════════════════════════════════════════ */
+
+    .cta-buttons-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 8px;
+    }
+
+    /* ═════════════════════════════════════════════════════════════════════════
+       FOOTER
+       ═════════════════════════════════════════════════════════════════════════ */
+
+    footer {
+      background: var(--navy-dark);
+      color: white;
+      padding: 60px 0 30px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-section h4 {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      color: var(--teal);
+      letter-spacing: 1px;
+    }
+
+    .footer-section ul { list-style: none; }
+    .footer-section li { margin-bottom: 12px; }
+
+    .footer-section a {
+      color: rgba(255, 255, 255, 0.7);
+      transition: color 0.3s ease;
+      font-size: 14px;
+    }
+
+    .footer-section a:hover { color: var(--teal); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .footer-logo { display: flex; align-items: center; gap: 10px; font-weight: 700; color: white; }
+
+    /* ═════════════════════════════════════════════════════════════════════════
+       RESPONSIVE DESIGN
+       ═════════════════════════════════════════════════════════════════════════ */
+
+    @media (max-width: 900px) {
+      .team-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .hamburger { display: flex; }
+
+      section { padding: 50px 0; }
+      .hero { padding: 80px 0; }
+      .hero h1 { font-size: clamp(28px, 6vw, 42px); }
+      .hero p { font-size: 16px; }
+      .hero-buttons { flex-direction: column; }
+      .btn { width: 100%; text-align: center; }
+
+      .products-grid, .services-grid, .architecture-grid { grid-template-columns: 1fr; }
+
+      .footer-bottom { flex-direction: column; text-align: center; }
+
+      h2 { font-size: clamp(24px, 5vw, 36px); }
+    }
+
+    @media (max-width: 480px) {
+      .container { padding: 0 16px; }
+      nav { height: 60px; }
+      .hero { margin-top: 60px; }
+      .hero h1 { font-size: clamp(24px, 6vw, 36px); margin-bottom: 16px; }
+      .hero p { font-size: 15px; margin-bottom: 24px; }
+      .hero-buttons { gap: 16px; }
+      .product-card { padding: 30px 20px; }
+      .service-card { padding: 24px 20px; }
+      .arch-card { padding: 24px 20px; }
+      .footer-grid { gap: 30px; }
+      section { padding: 40px 0; }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="container nav-content">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-icon">N</div>
+        <span>Nexus Technologies</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="index.html#products">Products</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="index.html#architecture">Architecture</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="contact.html" class="nav-cta">Request Demo</a>
+      <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="index.html#products">Products</a>
+    <a href="services.html">Services</a>
+    <a href="index.html#architecture">Architecture</a>
+    <a href="contact.html">Contact</a>
+    <a href="contact.html" class="nav-cta" style="text-align:center">Request Demo</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge"><span class="hero-badge-dot"></span> Open for enterprise partnerships · Kampala, Uganda</div>
+      <h1>Scaling Enterprise Digital Architecture &amp; <span class="gradient-text">Automated B2B Solutions</span></h1>
+      <p>Transform your business with our comprehensive suite of enterprise-grade solutions. From custom software engineering and cyber security auditing to network infrastructure management.</p>
+      <div class="hero-buttons">
+        <button class="btn btn-primary" onclick="scrollTo('products')">Explore Products</button>
+        <button class="btn btn-secondary" onclick="location.href='contact.html'">Partner With Us</button>
+      </div>
+      <div class="hero-contact-strip">
+        <div class="hero-contact-item">💬 <a href="https://wa.me/256758633718" target="_blank" rel="noopener">WhatsApp Us</a></div>
+        <div class="hero-contact-item">📞 <a href="tel:+256758633718">+256 758 633 718</a></div>
+        <div class="hero-contact-item">✉️ <a href="mailto:bensuubi614@gmail.com">bensuubi614@gmail.com</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section id="products">
+    <div class="container">
+      <span class="section-label">Flagship Products</span>
+      <h2>Enterprise B2B Solutions</h2>
+      <p class="section-desc">Market-leading platforms designed to transform operations and drive unprecedented growth.</p>
+
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-icon">📱</div>
+          <h3>Nexus Digital Menu SaaS</h3>
+          <p>An automated, multi-tenant QR-code driven ordering ecosystem built specifically to optimize premium highway cafes and high-volume lounges.</p>
+          <ul class="feature-list">
+            <li>Instant unique table QR code generation</li>
+            <li>Real-time live-order synchronization</li>
+            <li>Secure integrated mobile financial processing</li>
+            <li>Multi-venue management dashboard</li>
+            <li>Customer analytics &amp; reporting</li>
+            <li>Stock management</li>
+          </ul>
+          <a href="https://climax-lounge.vercel.app/" class="btn btn-primary" style="width: 100%; text-align: center;" target="_blank" rel="noopener">View Implementation →</a>
+        </div>
+
+        <div class="product-card">
+          <div class="product-icon">🌳</div>
+          <h3>Magoye Family Archives</h3>
+          <p>A modern, responsive heritage platform documenting the Magoye family's history, with an interactive family tree, member profiles, and a call to action for family initiatives.</p>
+          <ul class="feature-list">
+            <li>Interactive family tree visualization</li>
+            <li>Family member profiles</li>
+            <li>Genealogy research tools</li>
+            <li>Historical documentation &amp; photo archives</li>
+            <li>Real-time family chat</li>
+          </ul>
+          <a href="https://the-great-magoye-family.vercel.app/" class="btn btn-primary" style="width: 100%; text-align: center;" target="_blank" rel="noopener">View Implementation →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES TEASER -->
+  <section id="services" style="background: var(--slate-50);">
+    <div class="container">
+      <span class="section-label">Core Services</span>
+      <h2>Our Capabilities</h2>
+      <p class="section-desc">Comprehensive enterprise solutions tailored to your business needs. <a href="services.html" style="color:var(--teal); font-weight:600;">See full service details →</a></p>
+
+      <div class="services-grid">
+        <a href="services.html#software-engineering" class="service-card">
+          <h3>⚡ Custom Software Engineering</h3>
+          <p>Bespoke web apps, business systems, and QR ordering platforms tailored to your unique requirements, built with scalability and performance at the core.</p>
+          <span class="service-link">Learn more →</span>
+        </a>
+        <a href="services.html#security-auditing" class="service-card">
+          <h3>🔒 Cyber Security Auditing</h3>
+          <p>Comprehensive security assessments and penetration testing to identify and mitigate vulnerabilities before they become threats.</p>
+          <span class="service-link">Learn more →</span>
+        </a>
+        <a href="services.html#network-infrastructure" class="service-card">
+          <h3>🌐 Network Infrastructure</h3>
+          <p>Enterprise-grade network design, deployment, and management to ensure optimal performance, reliability, and security.</p>
+          <span class="service-link">Learn more →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARCHITECTURE -->
+  <section id="architecture">
+    <div class="container">
+      <span class="section-label">Scalable Ecosystem</span>
+      <h2>Modular Platform Architecture</h2>
+      <p class="section-desc">Our innovative subdomain architecture ensures enterprise-grade isolation, performance optimization, and seamless scalability.</p>
+
+      <div class="architecture-grid">
+        <div class="arch-card">
+          <span class="arch-badge">Live</span>
+          <h3>Digital Menu Platform</h3>
+          <a href="https://climax-lounge.vercel.app/" class="arch-domain" target="_blank" rel="noopener">Smart Ordering System ↗</a>
+          <p>QR-based ordering and payment processing for hospitality venues.</p>
+        </div>
+        <div class="arch-card">
+          <span class="arch-badge">Live</span>
+          <h3>Family Heritage Platform</h3>
+          <a href="https://the-great-magoye-family.vercel.app/" class="arch-domain" target="_blank" rel="noopener">Magoye Family Archives ↗</a>
+          <p>Family tree, member profiles, and archives for a private family network.</p>
+        </div>
+        <div class="arch-card">
+          <span class="arch-badge coming">Coming Q3</span>
+          <h3>Security Hub</h3>
+          <span class="arch-domain">security.nexus-technologies.co</span>
+          <p>Comprehensive security monitoring, auditing, and compliance management.</p>
+        </div>
+        <div class="arch-card">
+          <span class="arch-badge coming">Coming Q4</span>
+          <h3>Analytics Engine</h3>
+          <span class="arch-domain">analytics.nexus-technologies.co</span>
+          <p>Advanced business intelligence and real-time reporting dashboards.</p>
+        </div>
+        <div class="arch-card">
+          <span class="arch-badge coming">Roadmap</span>
+          <h3>Infrastructure Hub</h3>
+          <span class="arch-domain">infrastructure.nexus-technologies.co</span>
+          <p>Network management, cloud orchestration, and DevOps automation.</p>
+        </div>
+        <div class="arch-card">
+          <span class="arch-badge coming">Roadmap</span>
+          <h3>API Gateway</h3>
+          <span class="arch-domain">api.nexus-technologies.co</span>
+          <p>Unified integration layer connecting all Nexus platform services.</p>
+        </div>
+      </div>
+      <p class="arch-note">Items marked "Live" are deployed and in active use. Roadmap items are planned expansions and are not yet available.</p>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section style="background: var(--slate-50);">
+    <div class="container">
+      <span class="section-label">The Team</span>
+      <h2>Three Founders. One Vision.</h2>
+      <p class="section-desc">A tight-knit team of first-year developers building enterprise-grade technology for Kampala and beyond.</p>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar">BM</div>
+          <h3 class="team-name">Benard Magoye</h3>
+          <p class="team-role">FOUNDER &amp; LEAD DEVELOPER</p>
+          <span class="team-school">Year 1 · Victoria University · CS</span>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">MA</div>
+          <h3 class="team-name">Mukiibi Akram</h3>
+          <p class="team-role">CO-FOUNDER &amp; PARTNER</p>
+          <span class="team-school">Year 1 · ISBAT University · IT</span>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">YP</div>
+          <h3 class="team-name">Yiga Phil Collins</h3>
+          <p class="team-role">CO-FOUNDER &amp; PARTNER</p>
+          <span class="team-school">Year 1 · ISBAT University · IT</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT CTA -->
+  <section id="contact" style="background: var(--navy-dark); color: white; text-align: center;">
+    <div class="container">
+      <h2 style="color: white;">Ready to Transform Your Business?</h2>
+      <p style="color: rgba(255, 255, 255, 0.8); font-size: 18px; max-width: 600px; margin: 0 auto 20px;">Let's discuss how Nexus Technologies can architect the future of your enterprise.</p>
+      <div class="cta-buttons-row">
+        <a href="contact.html" class="btn btn-primary">Schedule a Consultation</a>
+        <a href="https://wa.me/256758633718" target="_blank" rel="noopener" class="btn btn-secondary" style="background:transparent; color:white; border-color:rgba(255,255,255,0.4);">Chat With Us</a>
+        <a href="tel:+256758633718" class="btn btn-secondary" style="background:transparent; color:white; border-color:rgba(255,255,255,0.4);">Call Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-section">
+          <div class="footer-logo" style="margin-bottom:18px;">
+            <div class="nav-logo-icon">N</div><span>Nexus Technologies</span>
+          </div>
+          <p style="font-size:13.5px; color:rgba(255,255,255,0.6); line-height:1.7;">Enterprise digital architecture and automated B2B solutions, built in Kampala, Uganda.</p>
+        </div>
+        <div class="footer-section">
+          <h4>Products</h4>
+          <ul>
+            <li><a href="index.html#products">Digital Menu SaaS</a></li>
+            <li><a href="index.html#products">Family Heritage Platform</a></li>
+            <li><a href="index.html#architecture">Security Hub</a></li>
+            <li><a href="index.html#architecture">Analytics Engine</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="services.html#software-engineering">Custom Development</a></li>
+            <li><a href="services.html#security-auditing">Security Auditing</a></li>
+            <li><a href="services.html#network-infrastructure">Infrastructure</a></li>
+            <li><a href="contact.html">Consulting</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Get In Touch</h4>
+          <ul>
+            <li><a href="mailto:bensuubi614@gmail.com">bensuubi614@gmail.com</a></li>
+            <li><a href="https://wa.me/256758633718" target="_blank" rel="noopener">WhatsApp</a></li>
+            <li><a href="tel:+256758633718">+256 758 633 718</a></li>
+            <li><a href="tel:+256784473076">+256 784 473 076</a></li>
+            <li><a href="tel:+256784427085">+256 784 427 085</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Nexus Technologies Uganda. All rights reserved. · <span style="color: var(--teal);">Take Tech On</span></div>
+        <div class="footer-links" style="display:flex; gap:20px;">
+          <a href="index.html">Home</a>
+          <a href="services.html">Services</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+
+    function scrollTo(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Nexus Technologies Uganda services — custom software engineering, cyber security auditing, and network infrastructure for enterprise clients in Kampala." />
+  <meta property="og:title" content="Services — Nexus Technologies Uganda" />
+  <meta property="og:description" content="Custom software engineering, cyber security auditing, and network infrastructure services." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <title>Services — Nexus Technologies Uganda</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --navy: #1a365d;
+      --navy-dark: #112233;
+      --tech-blue: #2b6cb0;
+      --teal: #00b4d8;
+      --slate-50: #f9fafb;
+      --slate-100: #f3f4f6;
+      --slate-200: #e5e7eb;
+      --slate-600: #4b5563;
+      --slate-700: #374151;
+      --text: #111827;
+      --text-muted: #6b7280;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: white;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { text-decoration: none; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+    /* NAV (shared) */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--slate-200);
+      height: 70px;
+    }
+    .nav-content { display: flex; align-items: center; justify-content: space-between; height: 100%; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; font-weight: 700; color: var(--navy); font-size: 18px; }
+    .nav-logo-icon {
+      width: 36px; height: 36px; background: var(--navy-dark); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--teal); font-weight: 800; font-size: 15px; flex-shrink: 0;
+    }
+    .nav-links { display: flex; gap: 30px; list-style: none; }
+    .nav-links a { color: var(--text); font-weight: 500; transition: color 0.3s ease; }
+    .nav-links a:hover, .nav-links a.active { color: var(--teal); }
+    .nav-cta {
+      background: var(--teal); color: white; padding: 10px 24px; border: none;
+      border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer;
+      transition: all 0.3s ease; display: inline-block;
+    }
+    .nav-cta:hover { background: #0099b3; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0, 180, 216, 0.2); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 5px; }
+    .hamburger span { width: 25px; height: 2px; background: var(--text); border-radius: 2px; }
+    .mobile-menu {
+      display: none; position: fixed; top: 70px; left: 0; right: 0; z-index: 99;
+      background: white; border-bottom: 1px solid var(--slate-200); padding: 24px 20px;
+      flex-direction: column; gap: 18px; box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 16px; color: var(--text); font-weight: 500; }
+    .mobile-menu a:hover { color: var(--teal); }
+
+    /* PAGE HERO */
+    .page-hero {
+      margin-top: 70px;
+      background: linear-gradient(135deg, var(--slate-50) 0%, white 100%);
+      padding: 72px 0 56px;
+    }
+    .section-label {
+      font-size: 12px; color: var(--teal); font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; margin-bottom: 15px; display: inline-block;
+    }
+    h1, h2 { color: var(--navy); font-weight: 800; line-height: 1.2; }
+    h1 { font-size: clamp(32px, 5vw, 50px); margin-bottom: 16px; }
+    h2 { font-size: clamp(26px, 4vw, 40px); margin-bottom: 14px; }
+    .page-hero p {
+      font-size: 16px; color: var(--text-muted); max-width: 600px; line-height: 1.8;
+    }
+
+    section { padding: 70px 0; }
+    .section-desc { font-size: 16px; color: var(--text-muted); max-width: 600px; margin-bottom: 40px; line-height: 1.8; }
+
+    /* SERVICE BLOCKS */
+    .service-block {
+      border: 1px solid var(--slate-200);
+      border-radius: 16px;
+      padding: 44px;
+      margin-bottom: 28px;
+      scroll-margin-top: 90px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .service-block:hover { border-color: rgba(0,180,216,0.35); box-shadow: 0 10px 30px rgba(0,180,216,0.08); }
+
+    .service-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--slate-200);
+    }
+
+    .service-num-large {
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      color: var(--teal);
+      letter-spacing: 2px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .service-icon-large { font-size: 34px; margin-bottom: 10px; }
+
+    .service-name-large { font-size: 26px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+
+    .service-tagline { font-size: 15px; color: var(--text-muted); max-width: 460px; }
+
+    .service-scope {
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .scope-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+    .scope-value { font-size: 18px; font-weight: 700; color: var(--navy); }
+
+    .service-body {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 40px;
+    }
+
+    .service-desc-full { font-size: 15px; color: var(--text-muted); line-height: 1.85; margin-bottom: 26px; }
+
+    .what-includes { font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--navy); margin-bottom: 14px; }
+
+    .includes-list { list-style: none; }
+    .includes-list li {
+      padding: 9px 0 9px 26px;
+      color: var(--text-muted);
+      font-size: 14.5px;
+      position: relative;
+      line-height: 1.6;
+    }
+    .includes-list li:before { content: "✓"; position: absolute; left: 0; color: var(--teal); font-weight: bold; }
+
+    .service-cta-area {
+      background: var(--slate-50);
+      border-radius: 12px;
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-self: start;
+    }
+
+    .btn {
+      padding: 13px 26px; border: none; border-radius: 8px; font-weight: 600;
+      font-size: 14.5px; cursor: pointer; transition: all 0.3s ease; display: inline-block; text-align: center;
+    }
+    .btn-primary { background: var(--teal); color: white; }
+    .btn-primary:hover { background: #0099b3; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0, 180, 216, 0.2); }
+    .btn-secondary { background: white; color: var(--navy); border: 2px solid var(--navy); }
+    .btn-secondary:hover { background: var(--navy); color: white; transform: translateY(-2px); }
+    .btn-ghost { background: transparent; color: var(--navy); border: 1px solid var(--slate-200); }
+    .btn-ghost:hover { border-color: var(--teal); color: var(--teal); }
+
+    .service-note { font-size: 12.5px; color: var(--text-muted); text-align: center; margin-top: 4px; }
+
+    /* CTA */
+    .cta-block {
+      background: var(--navy-dark);
+      color: white;
+      border-radius: 16px;
+      padding: 60px 40px;
+      text-align: center;
+    }
+    .cta-block h2 { color: white; }
+    .cta-block p { color: rgba(255,255,255,0.8); font-size: 16px; max-width: 520px; margin: 0 auto 28px; }
+    .cta-buttons-row { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+
+    /* FOOTER (shared) */
+    footer { background: var(--navy-dark); color: white; padding: 60px 0 30px; }
+    .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px; }
+    .footer-section h4 { font-size: 14px; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; color: var(--teal); letter-spacing: 1px; }
+    .footer-section ul { list-style: none; }
+    .footer-section li { margin-bottom: 12px; }
+    .footer-section a { color: rgba(255, 255, 255, 0.7); transition: color 0.3s ease; font-size: 14px; }
+    .footer-section a:hover { color: var(--teal); }
+    .footer-logo { display: flex; align-items: center; gap: 10px; font-weight: 700; color: white; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 30px; display: flex;
+      justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;
+      font-size: 14px; color: rgba(255, 255, 255, 0.7);
+    }
+
+    @media (max-width: 800px) {
+      .service-body { grid-template-columns: 1fr; }
+      .service-header { flex-direction: column; }
+      .service-scope { text-align: left; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; } .nav-cta { display: none; } .hamburger { display: flex; }
+      section { padding: 48px 0; }
+      .service-block { padding: 28px 22px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container nav-content">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-icon">N</div>
+        <span>Nexus Technologies</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#products">Products</a></li>
+        <li><a href="services.html" class="active">Services</a></li>
+        <li><a href="index.html#architecture">Architecture</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="contact.html" class="nav-cta">Request Demo</a>
+      <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="index.html#products">Products</a>
+    <a href="services.html">Services</a>
+    <a href="index.html#architecture">Architecture</a>
+    <a href="contact.html">Contact</a>
+    <a href="contact.html" class="nav-cta" style="text-align:center">Request Demo</a>
+  </div>
+
+  <section class="page-hero">
+    <div class="container">
+      <span class="section-label">Services</span>
+      <h1>Enterprise Capabilities, <span style="color:var(--teal)">Delivered End to End.</span></h1>
+      <p>From bespoke platforms to security and infrastructure, every engagement is scoped around your business — not a fixed template.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:56px">
+    <div class="container">
+
+      <!-- SOFTWARE ENGINEERING -->
+      <div class="service-block" id="software-engineering">
+        <div class="service-header">
+          <div>
+            <div class="service-num-large">01 · DEVELOPMENT</div>
+            <div class="service-icon-large">⚡</div>
+            <h2 class="service-name-large">Custom Software Engineering</h2>
+            <p class="service-tagline">Bespoke web apps, business systems, and ordering platforms built for scale.</p>
+          </div>
+          <div class="service-scope">
+            <p class="scope-label">Engagement</p>
+            <p class="scope-value">Custom Quote</p>
+          </div>
+        </div>
+        <div class="service-body">
+          <div>
+            <p class="service-desc-full">
+              We design and build production-grade software from the ground up — responsive business websites, point-of-sale and inventory systems, and real-time QR ordering platforms like our Digital Menu SaaS. Every build is scoped to your requirements, deployed to a live URL, and built with clean, maintainable code rather than generic templates.
+            </p>
+            <p class="what-includes">What's included</p>
+            <ul class="includes-list">
+              <li>Requirements scoping &amp; system design</li>
+              <li>Fully responsive web and business applications</li>
+              <li>Database design and secure backend architecture</li>
+              <li>QR ordering and point-of-sale systems</li>
+              <li>Deployment to a live production environment</li>
+              <li>Post-launch support and revision rounds</li>
+            </ul>
+          </div>
+          <div class="service-cta-area">
+            <a href="https://wa.me/256758633718?text=Hi%20Nexus%2C%20I%27m%20interested%20in%20Custom%20Software%20Engineering" target="_blank" rel="noopener" class="btn btn-primary">💬 Request via WhatsApp</a>
+            <a href="mailto:bensuubi614@gmail.com?subject=Custom%20Software%20Engineering%20Enquiry" class="btn btn-ghost">✉️ Email Us</a>
+            <p class="service-note">Tell us about your project for a scoped quote</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECURITY AUDITING -->
+      <div class="service-block" id="security-auditing">
+        <div class="service-header">
+          <div>
+            <div class="service-num-large">02 · SECURITY</div>
+            <div class="service-icon-large">🔒</div>
+            <h2 class="service-name-large">Cyber Security Auditing</h2>
+            <p class="service-tagline">Identify and close vulnerabilities before they become incidents.</p>
+          </div>
+          <div class="service-scope">
+            <p class="scope-label">Engagement</p>
+            <p class="scope-value">Custom Quote</p>
+          </div>
+        </div>
+        <div class="service-body">
+          <div>
+            <p class="service-desc-full">
+              We assess your applications, networks, and infrastructure for security gaps, then work with you to close them. Assessments cover both technical vulnerabilities and process weaknesses, with clear, prioritized findings — not just a scan report.
+            </p>
+            <p class="what-includes">What's included</p>
+            <ul class="includes-list">
+              <li>Application &amp; website security assessment</li>
+              <li>Network and configuration review</li>
+              <li>Vulnerability identification and risk prioritization</li>
+              <li>Remediation guidance and re-testing</li>
+              <li>Plain-language findings report for stakeholders</li>
+            </ul>
+          </div>
+          <div class="service-cta-area">
+            <a href="https://wa.me/256758633718?text=Hi%20Nexus%2C%20I%27m%20interested%20in%20a%20Security%20Audit" target="_blank" rel="noopener" class="btn btn-primary">💬 Request via WhatsApp</a>
+            <a href="mailto:bensuubi614@gmail.com?subject=Cyber%20Security%20Audit%20Enquiry" class="btn btn-ghost">✉️ Email Us</a>
+            <p class="service-note">Share your systems' scope for an accurate quote</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- NETWORK INFRASTRUCTURE -->
+      <div class="service-block" id="network-infrastructure">
+        <div class="service-header">
+          <div>
+            <div class="service-num-large">03 · INFRASTRUCTURE</div>
+            <div class="service-icon-large">🌐</div>
+            <h2 class="service-name-large">Network Infrastructure</h2>
+            <p class="service-tagline">Enterprise-grade network design, deployment, and management.</p>
+          </div>
+          <div class="service-scope">
+            <p class="scope-label">Engagement</p>
+            <p class="scope-value">Custom Quote</p>
+          </div>
+        </div>
+        <div class="service-body">
+          <div>
+            <p class="service-desc-full">
+              We design, set up, and maintain the network backbone your business runs on — from office LAN and Wi-Fi to server and cloud deployment. We also handle general software installation and configuration, on-site in Kampala or remote.
+            </p>
+            <p class="what-includes">What's included</p>
+            <ul class="includes-list">
+              <li>Network design, setup, and configuration</li>
+              <li>Server, hosting, and cloud deployment support</li>
+              <li>Windows / macOS / Linux installation &amp; setup</li>
+              <li>Developer tools and software configuration</li>
+              <li>On-site support in Kampala or remote assistance</li>
+              <li>Ongoing monitoring and maintenance options</li>
+            </ul>
+          </div>
+          <div class="service-cta-area">
+            <a href="https://wa.me/256758633718?text=Hi%20Nexus%2C%20I%20need%20Network%20Infrastructure%20support" target="_blank" rel="noopener" class="btn btn-primary">💬 Request via WhatsApp</a>
+            <a href="mailto:bensuubi614@gmail.com?subject=Network%20Infrastructure%20Enquiry" class="btn btn-ghost">✉️ Email Us</a>
+            <p class="service-note">On-site visits available within Kampala</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="container">
+      <div class="cta-block">
+        <h2>Not sure what you need?</h2>
+        <p>Just reach out and describe your problem — we'll help you figure out the right scope and solution.</p>
+        <div class="cta-buttons-row">
+          <a href="contact.html" class="btn btn-primary">Get In Touch</a>
+          <a href="https://wa.me/256758633718" target="_blank" rel="noopener" class="btn btn-secondary" style="background:transparent; color:white; border-color:rgba(255,255,255,0.4);">WhatsApp Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-section">
+          <div class="footer-logo" style="margin-bottom:18px;">
+            <div class="nav-logo-icon">N</div><span>Nexus Technologies</span>
+          </div>
+          <p style="font-size:13.5px; color:rgba(255,255,255,0.6); line-height:1.7;">Enterprise digital architecture and automated B2B solutions, built in Kampala, Uganda.</p>
+        </div>
+        <div class="footer-section">
+          <h4>Products</h4>
+          <ul>
+            <li><a href="index.html#products">Digital Menu SaaS</a></li>
+            <li><a href="index.html#products">Family Heritage Platform</a></li>
+            <li><a href="index.html#architecture">Security Hub</a></li>
+            <li><a href="index.html#architecture">Analytics Engine</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="services.html#software-engineering">Custom Development</a></li>
+            <li><a href="services.html#security-auditing">Security Auditing</a></li>
+            <li><a href="services.html#network-infrastructure">Infrastructure</a></li>
+            <li><a href="contact.html">Consulting</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Get In Touch</h4>
+          <ul>
+            <li><a href="mailto:bensuubi614@gmail.com">bensuubi614@gmail.com</a></li>
+            <li><a href="https://wa.me/256758633718" target="_blank" rel="noopener">WhatsApp</a></li>
+            <li><a href="tel:+256758633718">+256 758 633 718</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Nexus Technologies Uganda. All rights reserved. · <span style="color: var(--teal);">Take Tech On</span></div>
+        <div class="footer-links" style="display:flex; gap:20px;">
+          <a href="index.html">Home</a>
+          <a href="services.html">Services</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+  </script>
+</body>
+</html>

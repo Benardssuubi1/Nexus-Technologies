@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Contact Nexus Technologies Uganda — WhatsApp, phone, email, or send a project enquiry directly." />
+  <meta property="og:title" content="Contact — Nexus Technologies Uganda" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <title>Contact — Nexus Technologies Uganda</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --navy: #1a365d;
+      --navy-dark: #112233;
+      --tech-blue: #2b6cb0;
+      --teal: #00b4d8;
+      --slate-50: #f9fafb;
+      --slate-100: #f3f4f6;
+      --slate-200: #e5e7eb;
+      --slate-600: #4b5563;
+      --slate-700: #374151;
+      --text: #111827;
+      --text-muted: #6b7280;
+      --error: #e53e3e;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: white;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { text-decoration: none; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+    /* NAV (shared) */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--slate-200);
+      height: 70px;
+    }
+    .nav-content { display: flex; align-items: center; justify-content: space-between; height: 100%; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; font-weight: 700; color: var(--navy); font-size: 18px; }
+    .nav-logo-icon {
+      width: 36px; height: 36px; background: var(--navy-dark); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--teal); font-weight: 800; font-size: 15px; flex-shrink: 0;
+    }
+    .nav-links { display: flex; gap: 30px; list-style: none; }
+    .nav-links a { color: var(--text); font-weight: 500; transition: color 0.3s ease; }
+    .nav-links a:hover, .nav-links a.active { color: var(--teal); }
+    .nav-cta {
+      background: var(--teal); color: white; padding: 10px 24px; border: none;
+      border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer;
+      transition: all 0.3s ease; display: inline-block;
+    }
+    .nav-cta:hover { background: #0099b3; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0, 180, 216, 0.2); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 5px; }
+    .hamburger span { width: 25px; height: 2px; background: var(--text); border-radius: 2px; }
+    .mobile-menu {
+      display: none; position: fixed; top: 70px; left: 0; right: 0; z-index: 99;
+      background: white; border-bottom: 1px solid var(--slate-200); padding: 24px 20px;
+      flex-direction: column; gap: 18px; box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 16px; color: var(--text); font-weight: 500; }
+    .mobile-menu a:hover { color: var(--teal); }
+
+    /* PAGE HERO */
+    .page-hero {
+      margin-top: 70px;
+      background: linear-gradient(135deg, var(--slate-50) 0%, white 100%);
+      padding: 72px 0 56px;
+    }
+    .section-label {
+      font-size: 12px; color: var(--teal); font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; margin-bottom: 15px; display: inline-block;
+    }
+    h1, h2 { color: var(--navy); font-weight: 800; line-height: 1.2; }
+    h1 { font-size: clamp(32px, 5vw, 50px); margin-bottom: 16px; }
+    h2 { font-size: clamp(22px, 3.4vw, 30px); margin-bottom: 10px; }
+    .page-hero p { font-size: 16px; color: var(--text-muted); max-width: 600px; line-height: 1.8; }
+
+    section { padding: 70px 0; }
+
+    /* CONTACT GRID */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .contact-cards { display: flex; flex-direction: column; gap: 16px; }
+
+    .contact-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: 12px;
+      padding: 22px;
+      transition: all 0.25s ease;
+      color: var(--text);
+    }
+    .contact-card:hover { border-color: var(--teal); box-shadow: 0 8px 20px rgba(0,180,216,0.08); transform: translateY(-2px); }
+
+    .contact-card-icon {
+      width: 44px; height: 44px; flex-shrink: 0;
+      background: white; border: 1px solid var(--slate-200); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; font-size: 19px;
+    }
+
+    .contact-card-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--teal); font-weight: 700; margin-bottom: 3px; }
+    .contact-card-value { font-size: 15.5px; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+    .contact-card-sub { font-size: 12.5px; color: var(--text-muted); }
+
+    /* FORM */
+    .form-card {
+      background: white;
+      border: 1px solid var(--slate-200);
+      border-radius: 16px;
+      padding: 40px;
+    }
+
+    .form-title { font-size: 22px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+    .form-sub { font-size: 14px; color: var(--text-muted); margin-bottom: 28px; line-height: 1.6; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .form-group { margin-bottom: 20px; }
+
+    .form-label { display: block; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--navy); margin-bottom: 8px; }
+
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      padding: 12px 14px;
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 14.5px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      outline: none; border-color: var(--teal); background: white;
+    }
+    .form-input::placeholder, .form-textarea::placeholder { color: #9ca3af; }
+    .form-textarea { resize: vertical; min-height: 120px; font-family: inherit; }
+    .form-select { cursor: pointer; }
+
+    .form-error { font-size: 12.5px; color: var(--error); margin-top: 6px; display: none; }
+    .form-group.invalid .form-input,
+    .form-group.invalid .form-textarea { border-color: var(--error); }
+    .form-group.invalid .form-error { display: block; }
+
+    .btn-submit {
+      width: 100%;
+      padding: 15px;
+      background: var(--teal);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      font-family: inherit;
+    }
+    .btn-submit:hover:not(:disabled) { background: #0099b3; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0, 180, 216, 0.2); }
+    .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+    .form-note { font-size: 12.5px; color: var(--text-muted); text-align: center; margin-top: 14px; }
+    .form-note a { color: var(--teal); font-weight: 600; }
+
+    .form-success, .form-failure { display: none; text-align: center; padding: 30px 10px; }
+    .form-success .icon, .form-failure .icon { font-size: 44px; margin-bottom: 16px; }
+    .form-success h3, .form-failure h3 { font-size: 19px; color: var(--navy); margin-bottom: 10px; }
+    .form-success p, .form-failure p { font-size: 14px; color: var(--text-muted); max-width: 340px; margin: 0 auto; }
+
+    /* TEAM QUICK */
+    .team-quick { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 30px; }
+    .team-quick-card { background: var(--slate-50); border: 1px solid var(--slate-200); border-radius: 12px; padding: 26px 20px; text-align: center; }
+    .team-quick-avatar {
+      width: 54px; height: 54px; background: var(--navy-dark); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 800; color: var(--teal); margin: 0 auto 14px;
+    }
+    .team-quick-name { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+    .team-quick-role { font-size: 11.5px; color: var(--teal); font-weight: 700; margin-bottom: 10px; }
+    .team-quick-school { font-size: 11px; color: var(--text-muted); }
+
+    /* FOOTER (shared) */
+    footer { background: var(--navy-dark); color: white; padding: 60px 0 30px; }
+    .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px; }
+    .footer-section h4 { font-size: 14px; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; color: var(--teal); letter-spacing: 1px; }
+    .footer-section ul { list-style: none; }
+    .footer-section li { margin-bottom: 12px; }
+    .footer-section a { color: rgba(255, 255, 255, 0.7); transition: color 0.3s ease; font-size: 14px; }
+    .footer-section a:hover { color: var(--teal); }
+    .footer-logo { display: flex; align-items: center; gap: 10px; font-weight: 700; color: white; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 30px; display: flex;
+      justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;
+      font-size: 14px; color: rgba(255, 255, 255, 0.7);
+    }
+
+    @media (max-width: 900px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      .team-quick { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; } .nav-cta { display: none; } .hamburger { display: flex; }
+      section { padding: 48px 0; }
+      .form-row { grid-template-columns: 1fr; }
+      .form-card { padding: 26px 20px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container nav-content">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-icon">N</div>
+        <span>Nexus Technologies</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#products">Products</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="index.html#architecture">Architecture</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+      <a href="contact.html" class="nav-cta">Request Demo</a>
+      <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="index.html#products">Products</a>
+    <a href="services.html">Services</a>
+    <a href="index.html#architecture">Architecture</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <section class="page-hero">
+    <div class="container">
+      <span class="section-label">Contact</span>
+      <h1>Let's Architect <span style="color:var(--teal)">Your Next Build.</span></h1>
+      <p>Reach out via WhatsApp, phone, email, or the form below. We respond fast and love a good technical conversation.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:56px">
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- LEFT: contact channels -->
+        <div class="contact-cards">
+          <a href="https://wa.me/256758633718" target="_blank" rel="noopener" class="contact-card">
+            <div class="contact-card-icon">💬</div>
+            <div>
+              <p class="contact-card-label">WhatsApp</p>
+              <p class="contact-card-value">+256 758 633 718</p>
+              <p class="contact-card-sub">Fastest way to reach us</p>
+            </div>
+          </a>
+          <a href="tel:+256758633718" class="contact-card">
+            <div class="contact-card-icon">📞</div>
+            <div>
+              <p class="contact-card-label">Phone</p>
+              <p class="contact-card-value">+256 758 633 718</p>
+              <p class="contact-card-sub">Also: +256 784 473 076 · +256 784 427 085</p>
+            </div>
+          </a>
+          <a href="mailto:bensuubi614@gmail.com" class="contact-card">
+            <div class="contact-card-icon">✉️</div>
+            <div>
+              <p class="contact-card-label">Email</p>
+              <p class="contact-card-value">bensuubi614@gmail.com</p>
+              <p class="contact-card-sub">We respond within 24 hours</p>
+            </div>
+          </a>
+          <div class="contact-card" style="cursor:default">
+            <div class="contact-card-icon">📍</div>
+            <div>
+              <p class="contact-card-label">Location</p>
+              <p class="contact-card-value">Kampala, Uganda</p>
+              <p class="contact-card-sub">On-site visits available</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: form -->
+        <div class="form-card">
+          <div id="formContent">
+            <h2 class="form-title">Send us a message</h2>
+            <p class="form-sub">Tell us about your project and we'll get back to you within a few hours. This sends straight to our inbox — no account or app needed on your end.</p>
+
+            <form id="contactForm" novalidate>
+              <div class="form-row">
+                <div class="form-group" id="group-name">
+                  <label class="form-label" for="name">Your Name</label>
+                  <input class="form-input" type="text" id="name" name="name" placeholder="e.g. John Ssekandi" />
+                  <p class="form-error">Please enter your name.</p>
+                </div>
+                <div class="form-group" id="group-email">
+                  <label class="form-label" for="email">Email</label>
+                  <input class="form-input" type="email" id="email" name="email" placeholder="you@company.com" />
+                  <p class="form-error">Please enter a valid email address.</p>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="phone">Phone / WhatsApp</label>
+                  <input class="form-input" type="tel" id="phone" name="phone" placeholder="+256 7XX XXX XXX" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="company">Company (optional)</label>
+                  <input class="form-input" type="text" id="company" name="company" placeholder="Your organization" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="service">Service Needed</label>
+                <select class="form-select" id="service" name="service">
+                  <option value="" disabled selected>Select a service…</option>
+                  <option>Custom Software Engineering</option>
+                  <option>Cyber Security Auditing</option>
+                  <option>Network Infrastructure</option>
+                  <option>Digital Menu SaaS — Demo Request</option>
+                  <option>Something else</option>
+                </select>
+              </div>
+
+              <div class="form-group" id="group-message">
+                <label class="form-label" for="message">Your Message</label>
+                <textarea class="form-textarea" id="message" name="message" placeholder="Describe what you need — the more detail the better…"></textarea>
+                <p class="form-error">Please add a short message.</p>
+              </div>
+
+              <!-- Honeypot field to reduce spam, hidden from real users -->
+              <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+
+              <button type="submit" class="btn-submit" id="submitBtn">Send Message →</button>
+              <p class="form-note">Or <a href="https://wa.me/256758633718" target="_blank" rel="noopener">WhatsApp us directly</a> — it's faster ↗</p>
+            </form>
+          </div>
+
+          <div class="form-success" id="formSuccess">
+            <div class="icon">✅</div>
+            <h3>Message sent!</h3>
+            <p>Thanks for reaching out — it's landed straight in our inbox. We'll get back to you within a few hours.</p>
+          </div>
+
+          <div class="form-failure" id="formFailure">
+            <div class="icon">⚠️</div>
+            <h3>Couldn't send that</h3>
+            <p>Something went wrong on our end. Please try again, or reach us directly on <a href="https://wa.me/256758633718" target="_blank" rel="noopener" style="color:var(--teal); font-weight:600;">WhatsApp</a> or <a href="mailto:bensuubi614@gmail.com" style="color:var(--teal); font-weight:600;">email</a>.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TEAM -->
+      <p class="section-label" style="margin-top:64px">The Team</p>
+      <h2 style="margin-bottom:12px">Who You'll Work With</h2>
+      <div class="team-quick">
+        <div class="team-quick-card">
+          <div class="team-quick-avatar">BM</div>
+          <h3 class="team-quick-name">Benard Magoye</h3>
+          <p class="team-quick-role">FOUNDER &amp; LEAD DEVELOPER</p>
+          <span class="team-quick-school">Victoria University · CS · Year 1</span>
+        </div>
+        <div class="team-quick-card">
+          <div class="team-quick-avatar">MA</div>
+          <h3 class="team-quick-name">Mukiibi Akram</h3>
+          <p class="team-quick-role">CO-FOUNDER &amp; PARTNER</p>
+          <span class="team-quick-school">ISBAT University · IT · Year 1</span>
+        </div>
+        <div class="team-quick-card">
+          <div class="team-quick-avatar">YP</div>
+          <h3 class="team-quick-name">Yiga Phil Collins</h3>
+          <p class="team-quick-role">CO-FOUNDER &amp; PARTNER</p>
+          <span class="team-quick-school">ISBAT University · IT · Year 1</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-section">
+          <div class="footer-logo" style="margin-bottom:18px;">
+            <div class="nav-logo-icon">N</div><span>Nexus Technologies</span>
+          </div>
+          <p style="font-size:13.5px; color:rgba(255,255,255,0.6); line-height:1.7;">Enterprise digital architecture and automated B2B solutions, built in Kampala, Uganda.</p>
+        </div>
+        <div class="footer-section">
+          <h4>Products</h4>
+          <ul>
+            <li><a href="index.html#products">Digital Menu SaaS</a></li>
+            <li><a href="index.html#products">Family Heritage Platform</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="services.html#software-engineering">Custom Development</a></li>
+            <li><a href="services.html#security-auditing">Security Auditing</a></li>
+            <li><a href="services.html#network-infrastructure">Infrastructure</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Get In Touch</h4>
+          <ul>
+            <li><a href="mailto:bensuubi614@gmail.com">bensuubi614@gmail.com</a></li>
+            <li><a href="https://wa.me/256758633718" target="_blank" rel="noopener">WhatsApp</a></li>
+            <li><a href="tel:+256758633718">+256 758 633 718</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Nexus Technologies Uganda. All rights reserved. · <span style="color: var(--teal);">Take Tech On</span></div>
+        <div class="footer-links" style="display:flex; gap:20px;">
+          <a href="index.html">Home</a>
+          <a href="services.html">Services</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+
+    // ── Contact form: sends a real email via FormSubmit.co — no backend/API key needed ──
+    // IMPORTANT: replace the address below with your own, then the FIRST submission will
+    // trigger a one-time "activate this form" email to that inbox. Click the link in it once,
+    // and every submission after that lands directly in the inbox.
+    const RECIPIENT_EMAIL = "bensuubi614@gmail.com";
+
+    const form = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+
+    function setInvalid(groupId, invalid) {
+      const el = document.getElementById(groupId);
+      if (el) el.classList.toggle('invalid', invalid);
+    }
+
+    function validate() {
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+      setInvalid('group-name', !name);
+      setInvalid('group-email', !emailOk);
+      setInvalid('group-message', !message);
+
+      return !!name && emailOk && !!message;
+    }
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      if (!validate()) return;
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+
+      const formData = new FormData(form);
+      formData.append('_subject', 'New enquiry from nexus-technologies.co');
+      formData.append('_template', 'table');
+      formData.append('_captcha', 'false');
+
+      try {
+        const res = await fetch(`https://formsubmit.co/ajax/${RECIPIENT_EMAIL}`, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: formData
+        });
+
+        if (!res.ok) throw new Error('Request failed');
+
+        document.getElementById('formContent').style.display = 'none';
+        document.getElementById('formSuccess').style.display = 'block';
+      } catch (err) {
+        document.getElementById('formContent').style.display = 'none';
+        document.getElementById('formFailure').style.display = 'block';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Message →';
+      }
+    });
+  </script>
+</body>
+</html>
