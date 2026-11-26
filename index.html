@@ -7,30 +7,29 @@
   <meta property="og:title" content="Nexus Technologies Uganda — Enterprise Digital Solutions" />
   <meta property="og:description" content="Scaling enterprise digital architecture and automated B2B solutions across Uganda." />
   <meta property="og:type" content="website" />
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="icon" type="image/jpeg" href="assets/nexus_logo_cropped.jpg" />
   <title>Nexus Technologies Uganda — Enterprise Digital Solutions</title>
   <style>
-    
-     {
+    * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
     :root {
-      --navy: #1a365d;
-      --navy-dark: #112233;
-      --tech-blue: #2b6cb0;
-      --teal: #00b4d8;
+      --navy: #050a44;
+      --navy-dark: #141619;
+      --tech-blue: #0a21c0;
+      --teal: #0a21c0;
 
-      --slate-50: #f9fafb;
-      --slate-100: #f3f4f6;
-      --slate-200: #e5e7eb;
-      --slate-600: #4b5563;
-      --slate-700: #374151;
+      --slate-50: #f0f0fb;
+      --slate-100: #e6e7f0;
+      --slate-200: #b3b4bd;
+      --slate-600: #5e606b;
+      --slate-700: #2c2e3a;
 
-      --text: #111827;
-      --text-muted: #6b7280;
+      --text: #141619;
+      --text-muted: #626470;
     }
 
     html {
@@ -80,18 +79,11 @@
       font-size: 18px;
     }
 
-    .nav-logo-icon {
-      width: 36px;
-      height: 36px;
-      background: var(--navy-dark);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--teal);
-      font-weight: 800;
-      font-size: 15px;
-      letter-spacing: -0.5px;
+    .nav-logo img {
+      display: block;
+      width: 84px;
+      height: 60px;
+      object-fit: contain;
       flex-shrink: 0;
     }
 
@@ -607,7 +599,8 @@
       color: rgba(255, 255, 255, 0.7);
     }
 
-    .footer-logo { display: flex; align-items: center; gap: 10px; font-weight: 700; color: white; }
+    .footer-logo { display: flex; align-items: center; }
+    .footer-logo img { width: 120px; height: 84px; object-fit: contain; border-radius: 4px; }
 
     /* ═════════════════════════════════════════════════════════════════════════
        RESPONSIVE DESIGN
@@ -649,6 +642,126 @@
       .footer-grid { gap: 30px; }
       section { padding: 40px 0; }
     }
+
+    body { background: var(--slate-50); }
+
+    nav {
+      background: rgba(240, 240, 251, 0.94);
+      border-bottom-color: rgba(179, 180, 189, 0.45);
+    }
+
+    .hero {
+      background:
+        radial-gradient(circle at 82% 18%, rgba(10, 33, 192, 0.28), transparent 30%),
+        linear-gradient(135deg, var(--navy-dark), var(--slate-700) 58%, var(--navy));
+      padding: 112px 0 92px;
+    }
+
+    .hero h1 {
+      max-width: 960px;
+      color: white;
+      letter-spacing: -0.035em;
+    }
+
+    .hero .gradient-text {
+      background: linear-gradient(110deg, var(--slate-200), white);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .hero p { color: rgba(255, 255, 255, 0.76); }
+
+    .hero-badge {
+      color: var(--slate-200);
+      border-color: rgba(179, 180, 189, 0.34);
+      background: rgba(44, 46, 58, 0.72);
+    }
+
+    .hero-badge-dot { background: var(--tech-blue); }
+    .hero-contact-strip { border-color: rgba(179, 180, 189, 0.28); }
+    .hero-contact-item, .hero-contact-item a { color: rgba(255, 255, 255, 0.72); }
+    .hero-contact-item a:hover { color: white; }
+
+    .section-label { color: var(--tech-blue); }
+    h2 { color: var(--navy); letter-spacing: -0.025em; }
+    .section-desc { color: var(--text-muted); }
+
+    .btn { border-radius: 10px; }
+    .btn-primary { background: var(--tech-blue); }
+    .btn-primary:hover {
+      background: var(--navy);
+      box-shadow: 0 12px 28px rgba(10, 33, 192, 0.28);
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--navy);
+      border-color: var(--navy);
+    }
+
+    .product-card,
+    .service-card,
+    .arch-card,
+    .team-card {
+      background: white;
+      border-color: rgba(179, 180, 189, 0.58);
+      border-radius: 18px;
+      box-shadow: 0 14px 36px rgba(20, 22, 25, 0.06);
+    }
+
+    .product-card:hover,
+    .service-card:hover,
+    .arch-card:hover,
+    .team-card:hover {
+      border-color: var(--tech-blue);
+      box-shadow: 0 18px 42px rgba(10, 33, 192, 0.12);
+    }
+
+    .product-card h3,
+    .service-card h3,
+    .arch-card h3,
+    .team-name { color: var(--navy); }
+
+    .feature-list li:before,
+    .service-card .service-link,
+    .arch-domain,
+    .team-role { color: var(--tech-blue); }
+
+    .team-avatar {
+      background: var(--navy);
+      color: white;
+    }
+
+    .team-school {
+      background: var(--slate-50);
+      border-color: rgba(179, 180, 189, 0.7);
+    }
+
+    #contact {
+      background: linear-gradient(125deg, var(--navy-dark), var(--navy));
+    }
+
+    #contact .btn-secondary {
+      color: white;
+      border-color: rgba(179, 180, 189, 0.65);
+    }
+
+    #contact .btn-secondary:hover {
+      background: var(--tech-blue);
+      border-color: var(--tech-blue);
+    }
+
+    footer {
+      background: var(--navy-dark);
+      border-top-color: var(--tech-blue);
+    }
+
+    .footer-section h4 { color: var(--slate-200); }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 3px solid var(--tech-blue);
+      outline-offset: 3px;
+    }
   </style>
 </head>
 <body>
@@ -656,8 +769,7 @@
   <nav>
     <div class="container nav-content">
       <a href="index.html" class="nav-logo">
-        <div class="nav-logo-icon">N</div>
-        <span>Nexus Technologies</span>
+        <img src="assets/nexus_logo_cropped.jpg" alt="Nexus Technologies Uganda" />
       </a>
       <ul class="nav-links">
         <li><a href="index.html" class="active">Home</a></li>
@@ -686,7 +798,7 @@
   <section class="hero">
     <div class="container">
       <div class="hero-badge"><span class="hero-badge-dot"></span> Open for enterprise partnerships · Kampala, Uganda</div>
-      <h1>Scaling Enterprise Digital Architecture &amp; <span class="gradient-text">Automated B2B Solutions</span></h1>
+      <h1>Nexus Technologies Uganda:<br>Scaling Enterprise Digital Architecture &amp; <span class="gradient-text">Automated B2B Solutions</span></h1>
       <p>Transform your business with our comprehensive suite of enterprise-grade solutions. From custom software engineering and cyber security auditing to network infrastructure management.</p>
       <div class="hero-buttons">
         <button class="btn btn-primary" onclick="scrollTo('products')">Explore Products</button>
@@ -865,7 +977,7 @@
       <div class="footer-grid">
         <div class="footer-section">
           <div class="footer-logo" style="margin-bottom:18px;">
-            <div class="nav-logo-icon">N</div><span>Nexus Technologies</span>
+            <img src="assets/nexus_logo_cropped.jpg" alt="Nexus Technologies Uganda" />
           </div>
           <p style="font-size:13.5px; color:rgba(255,255,255,0.6); line-height:1.7;">Enterprise digital architecture and automated B2B solutions, built in Kampala, Uganda.</p>
         </div>
